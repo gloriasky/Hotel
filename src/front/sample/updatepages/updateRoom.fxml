@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<AnchorPane style="-fx-background-color: green;"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="front.sample.updatepages.UpdateRoom"
+            prefHeight="600.0" prefWidth="600.0">
+    <children>
+        <Button fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Вернуться к меню">
+            <font>
+                <Font name="Arial" size="18.0" />
+            </font>
+        </Button>
+        <Label layoutX="14.0" layoutY="47.0" prefHeight="42.0" prefWidth="601.0" text="Регистрация новой комнаты:" textFill="#f8f4f4">
+            <font>
+                <Font name="Arial" size="36.0" />
+            </font>
+        </Label>
+        <VBox layoutY="102.0" prefHeight="200.0" prefWidth="615.0">
+            <children>
+                <HBox prefHeight="50.0" prefWidth="615.0">
+                    <children>
+                        <Label prefHeight="27.0" prefWidth="161.0" text="Вместимость:" textFill="WHITE">
+                            <font>
+                                <Font name="Arial" size="24.0" />
+                            </font>
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                        </Label>
+                        <TextField fx:id="capacityField" prefHeight="31.0" prefWidth="150.0" />
+                        <Label fx:id="wrongCapacity" prefHeight="50.0" prefWidth="267.0" textFill="#f20000" wrapText="true">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="50.0" prefWidth="200.0">
+                    <children>
+                        <Label prefHeight="27.0" prefWidth="210.0" text="Количество звезд:" textFill="#fff7f7">
+                            <font>
+                                <Font name="Arial" size="24.0" />
+                            </font>
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                        </Label>
+                        <TextField fx:id="numberOfStarsField" prefHeight="31.0" prefWidth="150.0" />
+                        <Label fx:id="wrongNumberOfStars" prefHeight="50.0" prefWidth="267.0" textFill="#f20000" wrapText="true">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="50.0" prefWidth="615.0">
+                    <children>
+                        <Label prefHeight="27.0" prefWidth="73.0" text="Цена:" textFill="WHITE">
+                            <font>
+                                <Font name="Arial" size="24.0" />
+                            </font>
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                        </Label>
+                        <TextField fx:id="priceField" prefHeight="31.0" prefWidth="150.0" />
+                        <Label fx:id="wrongPrice" prefHeight="50.0" prefWidth="389.0" textFill="#f20000" wrapText="true">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="50.0" prefWidth="615.0">
+                    <children>
+                        <Label prefHeight="27.0" prefWidth="89.0" text="Статус:" textAlignment="CENTER" textFill="#f5f5f5">
+                            <font>
+                                <Font name="Arial" size="24.0" />
+                            </font>
+                        </Label>
+                        <ChoiceBox fx:id="statusBox" prefWidth="150.0" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+        <Button fx:id="submit" layoutX="352.0" layoutY="436.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="199.0" text="Подтвердить" />
+        <Button fx:id="reset" layoutX="60.0" layoutY="436.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="199.0" text="Отменить" />
+    </children>
+</AnchorPane>

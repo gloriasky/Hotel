@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="front.sample.menu.Menu">
+   <children>
+      <Button fx:id="guestsBtn" layoutX="200.0" layoutY="116.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" text="Гости">
+         <font>
+            <Font name="Arial" size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="roomsBtn" layoutX="200.0" layoutY="237.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" text="Комнаты">
+         <font>
+            <Font name="Arial" size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="servicesBtn" layoutX="200.0" layoutY="357.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" text="Услуги">
+         <font>
+            <Font name="Arial" size="36.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
