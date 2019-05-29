@@ -1,6 +1,5 @@
 package front.sample;
 
-import back.valadzko.kseniya.exceptions.SomethingWentWrong;
 import back.valadzko.kseniya.facade.Hotel;
 import front.sample.helpers.Navigation;
 import javafx.application.Application;
@@ -22,14 +21,15 @@ public class Main extends Application {
 
         navigation = new Navigation(primaryStage);
 
-        primaryStage.setTitle("My shop system");
+        primaryStage.setTitle("Электронный администратор");
         primaryStage.show();
+        primaryStage.setResizable(false);
 
-        Main.getNavigation().load("/front/sample/start/sample.fxml").Show();
+        Main.getNavigation().load("/front/sample/start/sample.fxml").show();
     }
 
 
-    public static void main(String[] args) throws SomethingWentWrong{
+    public static void main(String[] args){
         launch(args);
     }
 

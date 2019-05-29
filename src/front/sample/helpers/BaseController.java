@@ -19,7 +19,7 @@ public class BaseController implements Controller {
     }
 
     @Override
-    public void Show() {
+    public void show() {
         Main.getNavigation().Show(this);
     }
 

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="front.sample.listPages.listRooms.ListRoomsCntrl">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #81D5F3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="front.sample.listPages.listRooms.ListRoomsCntrl">
    <children>
       <Button fx:id="btnBack" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" text="Вернуться к меню">
          <font>

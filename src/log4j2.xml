@@ -9,7 +9,13 @@
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="sample.Navigation" level="error">
+        <Logger name="back.valadzko.kseniya.utills.XMLHelper" level="info">
+            <AppenderRef ref="File"/>
+        </Logger>
+        <Logger name="back.valadzko.kseniya.facade.Hotel" level="info">
+            <AppenderRef ref="File"/>
+        </Logger>
+        <Logger name="front.sample.helpers.Navigation" level="error">
             <AppenderRef ref="File"/>
         </Logger>
         <Root level="error">

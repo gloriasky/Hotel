@@ -1,4 +1,4 @@
-package back.valadzko.kseniya.exceptions;
+package back.valadzko.kseniya.utills.exceptions;
 
 public class SomethingWentWrong extends Exception {
 }

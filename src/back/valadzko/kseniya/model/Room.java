@@ -3,25 +3,15 @@ package back.valadzko.kseniya.model;
 import back.valadzko.kseniya.interfaces.model.IGuest;
 import back.valadzko.kseniya.interfaces.model.IRoom;
 import back.valadzko.kseniya.interfaces.model.Status;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 
 public class Room implements Serializable, Cloneable, IRoom {
 
-    @XmlElement
     private Integer id;
-    @XmlElement
     private Integer price;
-    @XmlElement
     private Integer capacity;
-    @XmlElement
     private Integer numberOfStars;
-    @XmlElement
     private Status status;
-    @XmlElement
     private IGuest guest;
 
 
@@ -94,10 +84,7 @@ public class Room implements Serializable, Cloneable, IRoom {
     }
 
     public boolean equals(IRoom room) {
-        if (this.getId().equals(room.getId())) return true;
-        else {
-            return false;
-        }
+        return this.getId().equals(room.getId());
     }
 
     @Override
@@ -113,15 +100,15 @@ public class Room implements Serializable, Cloneable, IRoom {
     @Override
     public String toString() {
         StringBuilder sBuilder = new StringBuilder();
-        sBuilder.append("Room ");
+        sBuilder.append("Комната № ");
         sBuilder.append(id);
-        sBuilder.append(": \nprice = ");
+        sBuilder.append(": \nЦена = ");
         sBuilder.append(price);
-        sBuilder.append(", \ncapacity = ");
+        sBuilder.append(" RUB, \nВместимость = ");
         sBuilder.append(capacity);
-        sBuilder.append(", \nnumber of stars = ");
+        sBuilder.append(", \nКоличество звезд = ");
         sBuilder.append(numberOfStars);
-        sBuilder.append(", \nstatus = ");
+        sBuilder.append(", \nСтатус = ");
         sBuilder.append(status);
         return sBuilder.toString();
     }

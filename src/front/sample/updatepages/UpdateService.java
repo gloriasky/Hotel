@@ -16,6 +16,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,13 +31,13 @@ public class UpdateService extends BaseController implements Initializable {
     public Button submit;
     public Button reset;
 
+    public final Logger logger = LogManager.getLogger(UpdateService.class.getName());
     private Hotel hotel = Hotel.getInstance();
     private static IService service;
 
     public static void set(IService current) {
         service = current;
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -50,10 +52,10 @@ public class UpdateService extends BaseController implements Initializable {
                 service.setPrice(price);
                 service.setName(name);
 
-                ServiceManager.getInstance().update(service);
+                hotel.updateService(service);
                 Main.getNavigation().GoBack();
             } catch (Exception ex) {
-
+                logger.error(ex.getMessage());
             }
         });
         priceField.textProperty().addListener(ChangeListenerImpl.getNumberCheckListener(wrongPrice));

@@ -3,8 +3,10 @@ package front.sample.listPages.listRooms;
 import back.valadzko.kseniya.facade.Hotel;
 import back.valadzko.kseniya.interfaces.model.IRoom;
 import back.valadzko.kseniya.interfaces.model.Status;
+import back.valadzko.kseniya.utills.comparators.*;
 import front.sample.Main;
 import front.sample.helpers.BaseController;
+import front.sample.listPages.listServices.ServiceSorters;
 import front.sample.updatepages.UpdateRoom;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,38 +47,49 @@ public class ListRoomsCntrl extends BaseController implements Initializable {
 
         listOfRoomsLV.setOnMouseClicked(event -> this.current = listOfRoomsLV.getSelectionModel().getSelectedItem());
 
-        numberOfFreeRoomsLbl.setText(String.valueOf(hotel.numberOfFreeRooms()));
+        numberOfFreeRoomsLbl.setText(String.valueOf(hotel.getFreeRooms().size()));
 
         ObservableList<Sorters> sorters = FXCollections.observableArrayList(Sorters.values());
         choicesChoiceB.setItems(sorters);
+        choicesChoiceB.setOnAction(event -> sort());
     }
 
     public void checkBoxListener(){
         if(freeRoomsChB.isSelected()){
-            listOfRooms = FXCollections.observableArrayList();
-            List<IRoom> data = hotel.getRooms();
-            for(int i = 0; i< data.size();i++){
-                if (data.get(i).getStatus() == Status.FREE){
-                    listOfRooms.add(data.get(i));
-                }
-            }
+            listOfRooms = FXCollections.observableArrayList(hotel.getFreeRooms());
         }
         else{
             listOfRooms = FXCollections.observableArrayList(hotel.getRooms());
         }
         listOfRoomsLV.setItems(listOfRooms);
+        numberOfFreeRoomsLbl.setText(String.valueOf(hotel.getFreeRooms().size()));
+
     }
 
     public void sort(){
-
+        Sorters sorter = choicesChoiceB.getSelectionModel().getSelectedItem();
+        if(sorter == Sorters.CAPACITY){
+            listOfRooms = FXCollections.observableArrayList(hotel.sortRooms(new SortByCapacity()));
+        }
+        else if(sorter == Sorters.PRICE){
+            listOfRooms = FXCollections.observableArrayList(hotel.sortRooms(new SortRoomByPrice()));
+        }
+        else if(sorter == Sorters.NUMBEROFSTARS){
+            listOfRooms = FXCollections.observableArrayList(hotel.sortRooms(new SortByNumberOfStars()));
+        }
+        else{
+            listOfRooms = FXCollections.observableArrayList(hotel.getRooms());
+        }
+        listOfRoomsLV.setItems(listOfRooms);
+        numberOfFreeRoomsLbl.setText(String.valueOf(hotel.getFreeRooms().size()));
     }
     public void update(){
         UpdateRoom.set(current);
-        Main.getNavigation().load("/front/sample/updatepages/updateRoom.fxml").Show();
+        Main.getNavigation().load("/front/sample/updatepages/updateRoom.fxml").show();
         sort();
     }
 
     public void add(){
-        Main.getNavigation().load("/front/sample/addpages/addRoom/addRoom.fxml").Show();
+        Main.getNavigation().load("/front/sample/addpages/addRoom/addRoom.fxml").show();
     }
 }

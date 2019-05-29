@@ -10,6 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +24,7 @@ public class AddServiceCntrl extends BaseController implements Initializable {
     public Label wrongPrice;
     public Button submit;
     public Button reset;
-
+    private final Logger logger = LogManager.getLogger(AddServiceCntrl.class.getName());
     private Hotel hotel = Hotel.getInstance();
 
     @Override
@@ -38,7 +40,7 @@ public class AddServiceCntrl extends BaseController implements Initializable {
 
                 Main.getNavigation().GoBack();
             }catch (Exception ex){
-
+                logger.error(ex.getMessage());
             }
         });
         priceField.textProperty().addListener(ChangeListenerImpl.getNumberCheckListener(wrongPrice));

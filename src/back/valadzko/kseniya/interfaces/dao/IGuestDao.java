@@ -7,17 +7,17 @@ import java.util.List;
 
 public interface IGuestDao extends GenericDao {
 
-    public static IGuestDao getInstance() {
+    static IGuestDao getInstance() {
         return null;
     }
 
-    public List<IGuest> readAll();
+    List<IGuest> readAll();
 
-    public void update(Integer guestNumber, Object guest);
+    void update(IGuest guest);
 
-    public Integer getCount();
+    Integer getCount();
 
-    public void addGuest(IGuest guest);
+    void addGuest(IGuest guest);
 
-    public List<IGuest> sort(Comparator<IGuest> comparator);
+    List<IGuest> sort(Comparator<IGuest> comparator);
 }

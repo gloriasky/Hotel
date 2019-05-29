@@ -10,9 +10,8 @@ import java.util.List;
 
 public class RoomDao extends AbstractDao implements IRoomDao {
 
-    private static IRoomDao roomRepository;
     private List<IRoom> rooms;
-    private static Integer lastId;
+    private static IRoomDao roomRepository;
 
     private RoomDao() {
         readObjects();
@@ -47,11 +46,6 @@ public class RoomDao extends AbstractDao implements IRoomDao {
     }
 
     public void addRoom(IRoom room) {
-        if (room.getId() == null) {
-            Integer id = lastId++;
-            room.setId(id);
-            lastId = id;
-        }
         if (rooms == null) {
             rooms = new ArrayList<>();
         }

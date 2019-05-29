@@ -4,32 +4,19 @@ import back.valadzko.kseniya.interfaces.model.IGuest;
 import back.valadzko.kseniya.interfaces.model.IRoom;
 import back.valadzko.kseniya.interfaces.model.IService;
 import back.valadzko.kseniya.utills.DateHelper;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@XmlRootElement
 public class Guest implements Cloneable, IGuest, Serializable {
 
-    @XmlElement
     private Integer id;
-    @XmlElement
     private String firstName;
-    @XmlElement
     private String lastName;
-    @XmlElement
     private Date dateOfRelease;
-    @XmlElement
     private Date arrivalDate;
-    @XmlElement
     private IRoom room;
-    @XmlElement
     private List<IService> services;
 
 
@@ -110,34 +97,29 @@ public class Guest implements Cloneable, IGuest, Serializable {
 
     public String toString() {
         StringBuilder sBuilder = new StringBuilder();
-        sBuilder.append("Guest: ");
         sBuilder.append(firstName);
         sBuilder.append(" ");
         sBuilder.append(lastName);
-        if(room != null) {
-            sBuilder.append(", room = ");
+        if (room != null) {
+            sBuilder.append("\nКомната = ");
             sBuilder.append(room.getId());
         }
-		if(!services.isEmpty()) {
-			sBuilder.append(", services: ");
+        if (!services.isEmpty()) {
+            sBuilder.append("\nПодключенные услуги: ");
             for (IService service : services) {
-                sBuilder.append("\n" + service.toString());
+                sBuilder.append("\n" + service.getName());
             }
-		}
-        sBuilder.append("\ndate Of arrival = ");
+        }
+        sBuilder.append("\nДата заселения: ");
         sBuilder.append(DateHelper.dateToString(arrivalDate));
-        sBuilder.append("\ndate Of Release = ");
+        sBuilder.append("\nДата отъезда: ");
         sBuilder.append(DateHelper.dateToString(dateOfRelease));
         return sBuilder.toString();
 
     }
 
     public boolean equals(IGuest guest) {
-        if (this.getId().equals(guest.getId())) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.getId().equals(guest.getId());
     }
 
     public IGuest clone() {

@@ -5,7 +5,9 @@ import back.valadzko.kseniya.interfaces.dao.IGuestDao;
 import back.valadzko.kseniya.interfaces.managers.IGuestManager;
 import back.valadzko.kseniya.interfaces.model.IGuest;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 public class GuestManager implements IGuestManager {
@@ -31,20 +33,19 @@ public class GuestManager implements IGuestManager {
         return guestRepository.readAll();
     }
 
-    public IGuest findGuest(IGuest guest) {
-        List<IGuest> guests = guestRepository.readAll();
-        IGuest necessaryGuest = null;
-        for (int i = 0; i < getCount(); i++) {
-            if (guest.equals(guests.get(i))) {
-                necessaryGuest = guests.get(i);
-                break;
+    public List<IGuest> getCurrentGuests(){
+        List<IGuest> curr = new ArrayList<>();
+        List<IGuest> all = guestRepository.readAll();
+        for(int i = 0; i < all.size(); i++){
+            if(all.get(i).getDateOfRelease().after(new Date())){
+                curr.add(all.get(i));
             }
         }
-        return necessaryGuest;
+        return curr;
     }
 
-    public void update(Integer guestNumber, IGuest guest) {
-        guestRepository.update(guestNumber, guest);
+    public void update(IGuest guest) {
+        guestRepository.update(guest);
     }
 
     public void addGuest(IGuest guest) {
@@ -52,7 +53,7 @@ public class GuestManager implements IGuestManager {
     }
 
     public Integer getCount() {
-        return guestRepository.getCount();
+        return getCurrentGuests().size();
     }
 
     public void save() {

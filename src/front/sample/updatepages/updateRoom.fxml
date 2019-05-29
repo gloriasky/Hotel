@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?>
-<AnchorPane style="-fx-background-color: green;"
-            xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="front.sample.updatepages.UpdateRoom"
-            prefHeight="600.0" prefWidth="600.0">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #81D5F3;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="front.sample.updatepages.UpdateRoom">
     <children>
         <Button fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Вернуться к меню">
             <font>
                 <Font name="Arial" size="18.0" />
             </font>
         </Button>
-        <Label layoutX="14.0" layoutY="47.0" prefHeight="42.0" prefWidth="601.0" text="Регистрация новой комнаты:" textFill="#f8f4f4">
+        <Label layoutX="14.0" layoutY="47.0" prefHeight="42.0" prefWidth="601.0" text="Изменение информации:" textFill="#f8f4f4">
             <font>
                 <Font name="Arial" size="36.0" />
             </font>

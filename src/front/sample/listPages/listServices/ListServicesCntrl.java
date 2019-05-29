@@ -45,38 +45,37 @@ public class ListServicesCntrl extends BaseController implements Initializable {
 
         ObservableList<ServiceSorters> sorters = FXCollections.observableArrayList(ServiceSorters.values());
         sortCB.setItems(sorters);
-        sortCB.setValue(ServiceSorters.NONE);
         sortCB.setOnAction(event -> sort());
 
         services.setOnMouseClicked(event -> this.current = services.getSelectionModel().getSelectedItem());
 
-        update.setOnAction(event -> update());
+        update.setOnAction(event -> updateService());
         addBtn.setOnAction(event -> add());
         refresh.setOnAction(event -> sort());
     }
 
     public void sort(){
         ServiceSorters sorter = sortCB.getSelectionModel().getSelectedItem();
-        if(sorter == ServiceSorters.NONE){
-            listOfServices = FXCollections.observableArrayList(hotel.getServices());
+        if(sorter == ServiceSorters.ALPHABETH){
+            listOfServices = FXCollections.observableArrayList(hotel.sortServices(new SortByAlphabet()));
         }
         else if(sorter == ServiceSorters.PRICE){
             listOfServices = FXCollections.observableArrayList(hotel.sortServices(new SortServiceByPrice()));
         }
         else{
-            listOfServices = FXCollections.observableArrayList(hotel.sortServices(new SortByAlphabet()));
+            listOfServices = FXCollections.observableArrayList(hotel.getServices());
         }
         services.setItems(listOfServices);
         numberOfServicesLbl.setText(String.valueOf(listOfServices.size()));
     }
-    public void update(){
+    public void updateService(){
         UpdateService.set(this.current);
-        Main.getNavigation().load("/front/sample/updatepages/updateService.fxml").Show();
+        Main.getNavigation().load("/front/sample/updatepages/updateService.fxml").show();
         sort();
     }
 
     public void add(){
-        Main.getNavigation().load("/front/sample/addpages/addService/addService.fxml").Show();
+        Main.getNavigation().load("/front/sample/addpages/addService/addService.fxml").show();
         sort();
     }
 }

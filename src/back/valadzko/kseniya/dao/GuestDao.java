@@ -5,18 +5,11 @@ import back.valadzko.kseniya.interfaces.model.IGuest;
 import back.valadzko.kseniya.model.Guest;
 import back.valadzko.kseniya.utills.XMLHelper;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-@XmlRootElement(name = "guests")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class GuestDao extends AbstractDao implements IGuestDao {
-    @XmlElement(name = "guest")
     private List<IGuest> guests;
     private static IGuestDao guestRepository;
     private static Integer lastId = 0;
@@ -36,10 +29,10 @@ public class GuestDao extends AbstractDao implements IGuestDao {
         return guests;
     }
 
-    public void update(Integer guestNumber, Object guest) {
+    public void update(IGuest guest) {
         for (int i = 0; i < guests.size(); i++) {
-            if (guestNumber.equals(guests.get(i).getId())) {
-                guests.set(i, (Guest) guest);
+            if (guest.getId().equals(guests.get(i).getId())) {
+                guests.set(i, guest);
             }
         }
     }
@@ -49,11 +42,6 @@ public class GuestDao extends AbstractDao implements IGuestDao {
     }
 
     public void addGuest(IGuest guest) {
-        if (guest.getId() == null) {
-            int id = lastId++;
-            guest.setId(id);
-            lastId = id;
-        }
         if (guests == null) {
             guests = new ArrayList<>();
         }

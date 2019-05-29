@@ -12,11 +12,12 @@ import front.sample.Main;
 import front.sample.helpers.BaseController;
 import front.sample.helpers.ChangeListenerImpl;
 import back.valadzko.kseniya.utills.DateHelper;
-import front.sample.listPages.listGuests.ListGuestsCntrl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,19 +25,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class addGuestCntrl extends BaseController implements Initializable {
+public class AddGuestCntrl extends BaseController implements Initializable {
     public Button btnBack;
     public TextField name;
     public TextField lastName;
     public TextField arrivalDate;
-    public Label wrongArrivalDate;
     public TextField dateOfRelease;
-    public Label wrongReleaseDate;
     public ChoiceBox<IRoom> freeRooms;
     public ListView<IService> services;
     public Button submit;
     public Button reset;
-
+    public final Logger logger = LogManager.getLogger(AddGuestCntrl.class.getName());
     private IRoom current;
 
     private Hotel hotel = Hotel.getInstance();
@@ -60,15 +59,14 @@ public class addGuestCntrl extends BaseController implements Initializable {
                 guest.setArrivalDate(dateOfArrival);
                 guest.setId(IdGenerator.generateId());
                 ObservableList<IService> curr = servicesSelectionModel.getSelectedItems();
-                List<IService> guestServ = new ArrayList<>();
-                guestServ.addAll(curr);
+                List<IService> guestServ = new ArrayList<>(curr);
                 guest.setServices(guestServ);
                 hotel.addGuest(guest);
                 hotel.setGuest(current.getId(),guest);
 
                 Main.getNavigation().GoBack();
             }catch (Exception ex){
-
+                logger.error(ex.getMessage());
             }
         });
 
@@ -79,11 +77,9 @@ public class addGuestCntrl extends BaseController implements Initializable {
             dateOfRelease.setText("");
         });
 
-        dateOfRelease.textProperty().addListener(ChangeListenerImpl.getDataCheckListener(wrongReleaseDate));
-        arrivalDate.textProperty().addListener(ChangeListenerImpl.getDataCheckListener(wrongArrivalDate));
 
-        ObservableList<IRoom> langs = FXCollections.observableArrayList(hotel.getRooms());
-        freeRooms.setItems(langs);
+        ObservableList<IRoom> rooms = FXCollections.observableArrayList(hotel.getFreeRooms());
+        freeRooms.setItems(rooms);
 
         freeRooms.setOnAction(event -> this.current = freeRooms.getValue());
 

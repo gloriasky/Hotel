@@ -1,6 +1,6 @@
 package back.valadzko.kseniya.interfaces.managers;
 
-import back.valadzko.kseniya.exceptions.SomethingWentWrong;
+import back.valadzko.kseniya.utills.exceptions.SomethingWentWrong;
 import back.valadzko.kseniya.interfaces.model.IGuest;
 import back.valadzko.kseniya.interfaces.model.IRoom;
 import back.valadzko.kseniya.utills.exceptions.ThereIsNoSuchAGuestException;
@@ -12,33 +12,26 @@ import java.util.List;
 
 public interface IRoomManager extends IManager {
 
-    public static IRoomManager getInstance() {
+    static IRoomManager getInstance() {
         return null;
     }
 
-    public List<IRoom> sort(Comparator<IRoom> comparator);
+    List<IRoom> sort(Comparator<IRoom> comparator);
 
-    public void changeStatus(IRoom changedRoom) throws SomethingWentWrong;
+    List<IRoom> readAll();
 
-    public List<IRoom> readAll();
+    void update(IRoom room);
 
-    public void update(IRoom room);
+    Integer getCount();
 
-    public Integer getCount();
+    int getSum(IGuest guest) throws ThereIsNoSuchAGuestException;
 
-    public int getSum(IGuest guest) throws ThereIsNoSuchAGuestException;
+    void addRoom(IRoom room);
 
-    public IRoom findNecessaryRoom(IRoom room) throws ThereIsNoSuchARoom;
+    void setGuest(Integer id, IGuest guest) throws SomethingWentWrong;
 
-    public void addRoom(IRoom room);
+    void evictGuest(Integer id, IGuest guest) throws SomethingWentWrong;
 
-    public void setGuest(Integer id, IGuest guest) throws SomethingWentWrong;
+    List<IRoom> getFreeRooms();
 
-    public void evictGuest(Integer id, IGuest guest) throws SomethingWentWrong;
-
-    public void changePrice(IRoom changedRoom);
-
-    public int getNumberOfFreeRooms();
-
-    public List<IRoom> freeByTheDate(Date date);
 }

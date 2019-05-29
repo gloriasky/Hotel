@@ -14,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,6 +33,7 @@ public class UpdateRoom extends BaseController implements Initializable {
     public Button submit;
     public Button reset;
 
+    public final Logger logger = LogManager.getLogger(UpdateRoom.class.getName());
     private Hotel hotel = Hotel.getInstance();
     private static IRoom room;
 
@@ -51,11 +54,11 @@ public class UpdateRoom extends BaseController implements Initializable {
                 room.setStatus(status);
                 room.setNumberOfStars(numberOfStars);
 
-                RoomManager.getInstance().update(room);
+                hotel.updateRoom(room);
 
                 Main.getNavigation().GoBack();
             }catch (Exception ex){
-                System.out.println(ex);
+                logger.error(ex.getMessage());
             }
 
         });

@@ -17,10 +17,10 @@ public class Menu extends BaseController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        guestsBtn.setOnAction(event -> Main.getNavigation().load("/front/sample/listPages/listGuests/listGuests.fxml").Show());
+        guestsBtn.setOnAction(event -> Main.getNavigation().load("/front/sample/listPages/listGuests/listGuests.fxml").show());
 
-        roomsBtn.setOnAction(event -> Main.getNavigation().load("/front/sample/listPages/listRooms/listRooms.fxml").Show());
+        roomsBtn.setOnAction(event -> Main.getNavigation().load("/front/sample/listPages/listRooms/listRooms.fxml").show());
 
-        servicesBtn.setOnAction(event -> Main.getNavigation().load("/front/sample/listPages/listServices/listServices.fxml").Show());
+        servicesBtn.setOnAction(event -> Main.getNavigation().load("/front/sample/listPages/listServices/listServices.fxml").show());
     }
 }

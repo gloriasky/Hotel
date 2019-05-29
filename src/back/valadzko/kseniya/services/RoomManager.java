@@ -2,7 +2,7 @@ package back.valadzko.kseniya.services;
 
 import back.valadzko.kseniya.dao.GuestDao;
 import back.valadzko.kseniya.dao.RoomDao;
-import back.valadzko.kseniya.exceptions.SomethingWentWrong;
+import back.valadzko.kseniya.utills.exceptions.SomethingWentWrong;
 import back.valadzko.kseniya.interfaces.dao.IGuestDao;
 import back.valadzko.kseniya.interfaces.dao.IRoomDao;
 import back.valadzko.kseniya.interfaces.managers.IRoomManager;
@@ -10,11 +10,8 @@ import back.valadzko.kseniya.interfaces.model.IGuest;
 import back.valadzko.kseniya.interfaces.model.IRoom;
 import back.valadzko.kseniya.interfaces.model.Status;
 import back.valadzko.kseniya.utills.exceptions.ThereIsNoSuchAGuestException;
-import back.valadzko.kseniya.utills.exceptions.ThereIsNoSuchARoom;
-
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 public class RoomManager implements IRoomManager {
@@ -46,10 +43,6 @@ public class RoomManager implements IRoomManager {
         return roomRepository.sort(comparator);
     }
 
-    public void changeStatus(IRoom changedRoom) throws SomethingWentWrong {
-        update(changedRoom);
-    }
-
     public List<IRoom> readAll() {
         return roomRepository.readAll();
     }
@@ -75,22 +68,6 @@ public class RoomManager implements IRoomManager {
             return sum;
         } else {
             throw new ThereIsNoSuchAGuestException();
-        }
-    }
-
-    public IRoom findNecessaryRoom(IRoom room) throws ThereIsNoSuchARoom {
-        boolean thereIsSuchARoom = false;
-        List<IRoom> rooms = roomRepository.readAll();
-        for (int i = 0; i < rooms.size(); i++) {
-            if (room.equals(rooms.get(i))) {
-                room = rooms.get(i);
-                thereIsSuchARoom = true;
-            }
-        }
-        if (thereIsSuchARoom) {
-            return room;
-        } else {
-            throw new ThereIsNoSuchARoom();
         }
     }
 
@@ -136,32 +113,16 @@ public class RoomManager implements IRoomManager {
         }
     }
 
-    public void changePrice(IRoom changedRoom) {
-        update(changedRoom);
-    }
-
-    public List<IRoom> freeByTheDate(Date date) {
+    @Override
+    public List<IRoom> getFreeRooms() {
         List<IRoom> allRooms = roomRepository.readAll();
         List<IRoom> freeRooms = new ArrayList<>();
-        int numberOfFreeRooms = 0;
         for(int i = 0; i<allRooms.size();i++){
-            if (allRooms.get(i).getStatus() == Status.FREE || allRooms.get(i).getGuest().getDateOfRelease().before(date)) {
+            if(allRooms.get(i).getStatus()==Status.FREE){
                 freeRooms.add(allRooms.get(i));
             }
         }
         return freeRooms;
-    }
-
-    @Override
-    public int getNumberOfFreeRooms() {
-        List<IRoom> allRooms = roomRepository.readAll();
-        int numberOfFreeRooms = 0;
-        for(int i = 0; i<allRooms.size();i++){
-            if(allRooms.get(i).getStatus()==Status.FREE){
-                numberOfFreeRooms++;
-            }
-        }
-        return numberOfFreeRooms;
     }
 
     public void save() {

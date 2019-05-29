@@ -13,6 +13,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -33,9 +35,11 @@ public class UpdateGuest extends BaseController implements Initializable {
     public ListView<IService> services;
     public Button submit;
     public Button reset;
+
     private static IGuest guest;
     private IRoom current;
     private Hotel hotel = Hotel.getInstance();
+    private final Logger logger = LogManager.getLogger(UpdateGuest.class.getName());
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,7 +49,6 @@ public class UpdateGuest extends BaseController implements Initializable {
 
         MultipleSelectionModel<IService> serviceSelectionModel = services.getSelectionModel();
         serviceSelectionModel.setSelectionMode(SelectionMode.MULTIPLE);
-
 
         submit.setOnAction(event -> {
             try {
@@ -60,16 +63,15 @@ public class UpdateGuest extends BaseController implements Initializable {
                 guest.setArrivalDate(dateOfArrival);
 
                 ObservableList<IService> curr = serviceSelectionModel.getSelectedItems();
-                List<IService> guestServ = new ArrayList<>();
-                guestServ.addAll(curr);
+                List<IService> guestServ = new ArrayList<>(curr);
                 guest.setServices(guestServ);
 
-                GuestManager.getInstance().update(guest.getId(),guest);
+                hotel.updateGuest(guest);
                 hotel.setGuest(current.getId(),guest);
 
                 Main.getNavigation().GoBack();
             }catch (Exception ex){
-
+                logger.error(ex.getMessage());
             }
         });
 
@@ -86,24 +88,40 @@ public class UpdateGuest extends BaseController implements Initializable {
 
 
         freeRooms.setOnAction(event -> this.current = freeRooms.getValue());
-
+        List<IRoom> rooms = hotel.getFreeRooms();
+        rooms.add(guest.getRoom());
+        ObservableList<IRoom> fRooms = FXCollections.observableArrayList(rooms);
+        freeRooms.setItems(fRooms);
         ObservableList<IService> serv = FXCollections.observableArrayList(hotel.getServices());
         services.setItems(serv);
+        findInd();
 
     }
     public static void set(IGuest current){
         guest = current;
     }
+
     private void setFields(){
         name.setText(guest.getFirstName());
         lastName.setText(guest.getLastName());
         arrivalDate.setText(DateHelper.dateToString(guest.getArrivalDate()));
         dateOfRelease.setText(DateHelper.dateToString(guest.getDateOfRelease()));
-        ObservableList<IRoom> rooms = FXCollections.observableArrayList(hotel.getRooms());
-        freeRooms.setItems(rooms);
         freeRooms.setValue(guest.getRoom());
-        ObservableList<IService> serviceObservableList = FXCollections.observableArrayList(hotel.getServices());
-        services.setItems(serviceObservableList);
     }
+    private void findInd(){
+        List<IService> allServ = hotel.getServices();
+        List<IService> guestServ = guest.getServices();
+        if(!guestServ.isEmpty()) {
+            int[] ind = new int[guestServ.size()];
 
+            for (int i = 0; i < guestServ.size(); i++) {
+                for (int j = 0; j < allServ.size(); j++) {
+                    if (guestServ.get(i).equals(allServ.get(j))) {
+                        ind[i] = j;
+                    }
+                }
+            }
+            services.getSelectionModel().selectIndices(ind[0], ind);
+        }
+    }
 }

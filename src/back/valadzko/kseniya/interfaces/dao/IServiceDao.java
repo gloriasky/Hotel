@@ -8,18 +8,18 @@ import java.util.List;
 
 public interface IServiceDao extends GenericDao {
 
-    public static IServiceDao getInstance() {
+    static IServiceDao getInstance() {
         return null;
     }
 
-    public List<IService> readAll();
+    List<IService> readAll();
 
-    public void update(IService changedService);
+    void update(IService changedService);
 
-    public Integer getCount();
+    Integer getCount();
 
-    public List<IService> sort(Comparator<IService> comparator);
+    List<IService> sort(Comparator<IService> comparator);
 
-    public void addService(IService service);
+    void addService(IService service);
 
 }

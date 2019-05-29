@@ -13,6 +13,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.sql.Statement;
@@ -26,12 +28,10 @@ public class AddRoomCntrl extends BaseController implements Initializable {
     public Label wrongNumberOfStars;
     public TextField priceField;
     public Label wrongPrice;
-    public ChoiceBox<Status> statusBox;
     public Button submit;
     public Button reset;
-
+    public final Logger logger = LogManager.getLogger(AddRoomCntrl.class.getName());
     private Hotel hotel = Hotel.getInstance();
-    private Status currentStatus;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,12 +43,13 @@ public class AddRoomCntrl extends BaseController implements Initializable {
                 int capacity = Integer.parseInt(capacityField.getText());
                 int price = Integer.parseInt(priceField.getText());
                 int numberOfStars = Integer.parseInt(numberOfStarsField.getText());
-                Status status = statusBox.getValue();
+                Status status = Status.FREE;
 
                 Room room = new Room(IdGenerator.generateId(), price, capacity, numberOfStars, status);
                 hotel.addRoom(room);
                 Main.getNavigation().GoBack();
             }catch (Exception ex){
+                logger.error(ex.getMessage());
             }
 
         });
@@ -61,9 +62,6 @@ public class AddRoomCntrl extends BaseController implements Initializable {
         capacityField.textProperty().addListener(ChangeListenerImpl.getNumberCheckListener(wrongCapacity));
         priceField.textProperty().addListener(ChangeListenerImpl.getNumberCheckListener(wrongPrice));
         numberOfStarsField.textProperty().addListener(ChangeListenerImpl.getNumberCheckListener(wrongNumberOfStars));
-
-        ObservableList<Status> statuses = FXCollections.observableArrayList(Status.values());
-        statusBox.setItems(statuses);
 
     }
 }

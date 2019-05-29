@@ -7,21 +7,19 @@ import java.util.List;
 
 public interface IServiceManager extends IManager {
 
-    public static IServiceManager getInstance() {
+    static IServiceManager getInstance() {
         return null;
     }
 
-    public List<IService> sort(Comparator<IService> comparator);
+    List<IService> sort(Comparator<IService> comparator);
 
-    public List<IService> readAll();
+    List<IService> readAll();
 
-    public void update(IService changedService);
+    void update(IService changedService);
 
-    public Integer getCount();
+    Integer getCount();
 
-    public void changePrice(IService changedService);
-
-    public void addService(IService service);
+    void addService(IService service);
 
 
 }

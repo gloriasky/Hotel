@@ -6,10 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,9 +64,5 @@ public class Navigation {
             controllers.remove(controllers.get(controllers.size() - 1));
             scene.setRoot((Parent) controllers.get(controllers.size() - 1).getView());
         }
-    }
-
-    public Stage getStage() {
-        return stage;
     }
 }

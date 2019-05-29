@@ -12,7 +12,6 @@ public class ServiceDao extends AbstractDao implements IServiceDao {
 
     private static IServiceDao serviceRepository;
     private List<IService> services;
-    private static Integer lastId;
 
     private ServiceDao() {
         readObjects();
@@ -47,11 +46,6 @@ public class ServiceDao extends AbstractDao implements IServiceDao {
     }
 
     public void addService(IService service) {
-        if (service.getId() == null) {
-            Integer id = lastId++;
-            service.setId(id);
-            lastId = id;
-        }
         if (services == null) {
             services = new ArrayList<>();
         }

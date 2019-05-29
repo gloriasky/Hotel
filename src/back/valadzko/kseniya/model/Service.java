@@ -61,12 +61,12 @@ public class Service implements Serializable, Cloneable, IService {
     @Override
     public String toString() {
         StringBuilder sBuilder = new StringBuilder();
-        sBuilder.append("Service: \nsection = ");
+        sBuilder.append("Услуга: \nСекция: ");
         sBuilder.append(section);
-        sBuilder.append(", \nname = ");
+        sBuilder.append(", \nНазавание: ");
         sBuilder.append(name);
-        sBuilder.append(", \nprice = ");
-        sBuilder.append(price);
+        sBuilder.append(", \nЦена: ");
+        sBuilder.append(price + " RUB");
         return sBuilder.toString();
     }
 

@@ -21,5 +21,18 @@ public enum Status {
                 return FREE;
         }
     }
+
+    @Override
+    public String toString() {
+        switch (this){
+            case FREE:
+                return "Свободна";
+            case BUSY:
+                return "Занята";
+            case REPAIRING:
+                return "Находится на обслуживании";
+        }
+        return "-1";
+    }
 }
 

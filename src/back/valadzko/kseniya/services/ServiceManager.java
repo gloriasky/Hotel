@@ -39,15 +39,6 @@ public class ServiceManager implements IServiceManager {
         return serviceRepository.getCount();
     }
 
-    public void changePrice(IService changedService) {
-        List<IService> services = serviceRepository.readAll();
-        for (int i = 0; i < services.size(); i++) {
-            if (services.get(i).getId().equals(changedService.getId())) {
-                services.get(i).setPrice(changedService.getPrice());
-            }
-        }
-    }
-
     public void addService(IService service) {
         serviceRepository.addService(service);
     }

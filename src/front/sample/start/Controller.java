@@ -16,6 +16,6 @@ public class Controller extends BaseController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        startBtn.setOnAction(event -> Main.getNavigation().load("/front/sample/menu/menu.fxml").Show());
+        startBtn.setOnAction(event -> Main.getNavigation().load("/front/sample/menu/menu.fxml").show());
     }
 }

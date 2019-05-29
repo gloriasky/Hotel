@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="541.0" prefWidth="615.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="front.sample.addpages.addService.AddServiceCntrl">
+<AnchorPane prefHeight="541.0" prefWidth="615.0" style="-fx-background-color: #81D5F3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="front.sample.addpages.addService.AddServiceCntrl">
    <children>
       <Button fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Вернуться к меню">
          <font>
@@ -51,7 +51,7 @@
             </HBox>
             <HBox prefHeight="50.0" prefWidth="615.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="73.0" text="Цена:" textFill="WHITE">
+                  <Label prefHeight="27.0" prefWidth="175.0" text="Цена(RUB):" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="24.0" />
                      </font>

@@ -7,17 +7,17 @@ import java.util.List;
 
 public interface IRoomDao extends GenericDao {
 
-    public static IRoomDao getInstance() {
+    static IRoomDao getInstance() {
         return null;
     }
 
-    public List<IRoom> readAll();
+    List<IRoom> readAll();
 
-    public void update(IRoom changedRoom);
+    void update(IRoom changedRoom);
 
-    public Integer getCount();
+    Integer getCount();
 
-    public List<IRoom> sort(Comparator<IRoom> comparator);
+    List<IRoom> sort(Comparator<IRoom> comparator);
 
-    public void addRoom(IRoom room);
+    void addRoom(IRoom room);
 }
